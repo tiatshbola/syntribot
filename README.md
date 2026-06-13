@@ -6,6 +6,7 @@ webcam using a [Teachable Machine](https://teachablemachine.withgoogle.com/)
 image model, then opens a short "therapy session" — a sequence of probing
 questions that branch on whether you appear **happy** or **sad/upset**.
 
+
 ## How it works
 
 1. On load, the sketch starts the webcam (hidden) and an ml5 image classifier
