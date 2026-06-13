@@ -21,9 +21,7 @@ The emotion model lives at:
 
 ## Running it
 
-This is a static site — no build step. Because it needs camera access, serve it
-over `http://localhost` (or `https://`) rather than opening `index.html` from
-the file system, since browsers block `getUserMedia` on `file://`.
+https://tiatshbola.github.io/syntribot/
 
 ```sh
 # from the project folder
