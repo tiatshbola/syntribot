@@ -23,11 +23,6 @@ https://tiatshbola.github.io/syntribot/
 
 https://tiatshbola.github.io/syntribot/
 
-```sh
-# from the project folder
-python -m http.server 8000
-# then open http://localhost:8000
-```
 
 Allow the camera permission when prompted.
 
