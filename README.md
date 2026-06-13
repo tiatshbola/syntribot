@@ -17,7 +17,7 @@ questions that branch on whether you appear **happy** or **sad/upset**.
    session walks through the bank until it ends.
 
 The emotion model lives at:
-`https://teachablemachine.withgoogle.com/models/HmMegiSBC/`
+https://tiatshbola.github.io/syntribot/
 
 ## Running it
 
