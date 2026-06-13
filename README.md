@@ -1,4 +1,4 @@
-# Syntribot — Dr Synthetica
+#  Dr Synthetica The AI Therapist
 
 An interactive webcam art piece built with [p5.js](https://p5js.org/) and
 [ml5.js](https://ml5js.org/). It reads your facial expression through the
