@@ -1,0 +1,59 @@
+/* Mrs Synthetic — brutalist black & white */
+:root{ --ink:#000; --paper:#fff; }
+*{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Space Mono", monospace; -webkit-font-smoothing:antialiased;
+}
+.app{ max-width:1080px; margin:0 auto; padding:40px 32px 72px; }
+
+.topbar{ margin-bottom:44px; }
+.brand{
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight:700; font-size:40px; line-height:1;
+  letter-spacing:-0.01em; text-transform:uppercase;
+}
+.dept{ font-size:13px; margin-top:14px; }
+
+.grid{ display:grid; grid-template-columns:520px 1fr; gap:56px; align-items:start; }
+@media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+
+.tab{
+  display:inline-block; background:var(--ink); color:var(--paper);
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  padding:6px 10px; margin-bottom:16px;
+}
+
+.videoBox{
+  width:100%; aspect-ratio:4/3; border:1px solid var(--ink);
+  line-height:0; overflow:hidden; background:var(--paper);
+}
+.videoBox canvas{ display:block; width:100%; height:100%; object-fit:cover; }
+
+.status{ margin-top:16px; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; }
+
+.btn{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:0.14em;
+  text-transform:uppercase; background:var(--ink); color:var(--paper);
+  border:1px solid var(--ink); padding:14px 26px; cursor:pointer;
+}
+#beginBtn{ margin-top:24px; }
+.btn:hover{ background:var(--paper); color:var(--ink); }
+.btn:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+
+.transcript{ display:flex; flex-direction:column; gap:28px; }
+.msg .who{
+  display:inline-block; background:var(--ink); color:var(--paper);
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  padding:5px 9px; margin-bottom:12px;
+}
+.msg.bot .text{ font-family:Georgia,"Times New Roman",Times,serif; font-size:34px; line-height:1.16; }
+.msg.user .text{ font-size:15px; letter-spacing:0.02em; }
+
+.controls{ display:flex; margin-top:34px; }
+#reply{
+  flex:1; font-family:"Space Mono", monospace; font-size:14px;
+  padding:14px 16px; border:1px solid var(--ink); border-right:none;
+  background:var(--paper); color:var(--ink);
+}
+#reply:focus{ outline:none; }
