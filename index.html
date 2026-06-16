@@ -1,31 +1,63 @@
-<main class="grid">
-  <section>
-    <span class="tab">Live Feed</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr Synthetica</title>
 
-    <div class="videoBox" id="videoBox"></div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-    <div class="status" id="detected">Analysing&hellip;</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
 
-    <button class="btn" id="beginBtn">
-      Begin Again
-    </button>
-  </section>
+  <link rel="stylesheet" href="style (1).css" />
+</head>
 
-  <section>
-    <span class="tab">Transcript</span>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">Dr Synthetica</div>
+      <div class="dept">
+        Department of Feeling &middot; Session Terminal
+      </div>
+    </header>
 
-    <div class="transcript" id="transcript"></div>
+    <main class="grid">
+      <section>
+        <span class="tab">Live Feed</span>
 
-    <div class="controls">
-      <input
-        id="reply"
-        type="text"
-        placeholder="Type your reply&hellip;"
-      />
+        <div class="videoBox" id="videoBox"></div>
 
-      <button class="btn" id="replyBtn">
-        Send
-      </button>
-    </div>
-  </section>
-</main>
+        <div class="status" id="detected">
+          Analysing&hellip;
+        </div>
+
+        <button class="btn" id="beginBtn">
+          Begin Again
+        </button>
+      </section>
+
+      <section>
+        <span class="tab">Transcript</span>
+
+        <div class="transcript" id="transcript"></div>
+
+        <div class="controls">
+          <input
+            id="reply"
+            type="text"
+            placeholder="Type your reply&hellip;"
+          />
+
+          <button class="btn" id="replyBtn">
+            Send
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
