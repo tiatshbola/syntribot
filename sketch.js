@@ -1,15 +1,13 @@
-// Dr Synthetica
-// Webcam emotion classifier + branching therapy session
+let classifier;
+let video;
+let label = "";
 
-let classifier, video, label = "";
-let sessionStart = 0;
-let waitSeconds = 5;
-
-// Teachable Machine model
 let imageModelURL =
   "https://teachablemachine.withgoogle.com/models/HmMegiSBC/";
 
-// Question banks
+let sessionStart = 0;
+let waitSeconds = 5;
+
 let responses = {
   happy: [
     "And underneath the smile, what's there?",
@@ -30,8 +28,6 @@ let responses = {
 
 let sessionBank = null;
 let questionIndex = 0;
-let sessionOver = false;
-
 let transcript = [];
 let scores = {};
 
@@ -39,50 +35,28 @@ let detectedEl;
 let transcriptEl;
 let replyInput;
 
-// Load Teachable Machine model
 function preload() {
-  ml5.setBackend("webgl");
-  classifier = ml5.imageClassifier(imageModelURL, {
-    flipped: true
-  });
-}
-
-// Create element if it doesn't already exist
-function ensure(id, tag, parent) {
-  let el = select("#" + id);
-
-  if (!el) {
-    el = createElement(tag || "div");
-    el.id(id);
-    el.parent(parent || document.body);
-  }
-
-  return el;
+  classifier = ml5.imageClassifier(imageModelURL);
 }
 
 function setup() {
-  let box = ensure("videoBox", "div");
-
-  // Canvas
   let cnv = createCanvas(560, 420);
-  cnv.parent(box);
+  cnv.parent("videoBox");
 
-  // Webcam
+  detectedEl = select("#detected");
+  transcriptEl = select("#transcript");
+  replyInput = select("#reply");
+
+  select("#replyBtn").mousePressed(handleReply);
+  select("#beginBtn").mousePressed(restart);
+
   video = createCapture(VIDEO);
+
   video.size(560, 420);
   video.hide();
 
-  // HTML elements
-  detectedEl = ensure("detected", "div");
-  transcriptEl = ensure("transcript", "div");
-  replyInput = ensure("reply", "input");
-
-  ensure("replyBtn", "button").mousePressed(handleReply);
-  ensure("beginBtn", "button").mousePressed(restart);
-
   sessionStart = millis();
 
-  // Start classification
   classifier.classifyStart(video, gotResult);
 }
 
@@ -110,13 +84,6 @@ function gotResult(results) {
   if (!results || results.length === 0) return;
 
   let top = results[0];
-
-  for (let r of results) {
-    if (r.confidence > top.confidence) {
-      top = r;
-    }
-  }
-
   label = top.label;
 
   let elapsed = (millis() - sessionStart) / 1000;
@@ -128,45 +95,28 @@ function gotResult(results) {
   }
 
   if (sessionBank === null) {
-    label = pickWinner();
-
     sessionBank = bankFor(label);
-
-    questionIndex = 0;
 
     transcript.push([
       "Dr Synthetica",
-      sessionBank[questionIndex]
+      sessionBank[0]
     ]);
 
     renderTranscript();
   }
 }
 
-function pickWinner() {
-  let best = null;
-  let bestScore = -1;
-
-  for (let k in scores) {
-    if (scores[k] > bestScore) {
-      bestScore = scores[k];
-      best = k;
-    }
-  }
-
-  return best || label || "happy";
-}
-
 function bankFor(lbl) {
   let key = lbl.toLowerCase();
-
-  if (responses[key]) return responses[key];
 
   if (key.includes("happy")) {
     return responses["happy"];
   }
 
-  if (key.includes("sad") || key.includes("upset")) {
+  if (
+    key.includes("sad") ||
+    key.includes("upset")
+  ) {
     return responses["sad/upset"];
   }
 
@@ -174,7 +124,7 @@ function bankFor(lbl) {
 }
 
 function handleReply() {
-  if (!sessionBank || sessionOver) return;
+  if (!sessionBank) return;
 
   let reply = replyInput.value().trim();
 
@@ -191,8 +141,6 @@ function handleReply() {
       "Dr Synthetica",
       sessionBank[questionIndex]
     ]);
-  } else {
-    sessionOver = true;
   }
 
   renderTranscript();
@@ -201,21 +149,13 @@ function handleReply() {
 function renderTranscript() {
   let html = "";
 
-  for (let entry of transcript) {
-    let who = entry[0];
-    let text = entry[1];
-
-    let cls =
-      who === "You" ? "user" : "bot";
-
-    html +=
-      '<div class="msg ' +
-      cls +
-      '"><span class="who">' +
-      who +
-      '</span><div class="text">' +
-      text +
-      "</div></div>";
+  for (let item of transcript) {
+    html += `
+      <div class="msg">
+        <span class="who">${item[0]}</span>
+        <div class="text">${item[1]}</div>
+      </div>
+    `;
   }
 
   transcriptEl.html(html);
@@ -224,13 +164,10 @@ function renderTranscript() {
 function restart() {
   sessionBank = null;
   questionIndex = 0;
-  sessionOver = false;
-
   transcript = [];
-  label = "";
   scores = {};
+  label = "";
 
-  replyInput.value("");
   transcriptEl.html("");
 
   sessionStart = millis();
