@@ -1,52 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dr Synthetica</title>
+<main class="grid">
+  <section>
+    <span class="tab">Live Feed</span>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <div class="videoBox" id="videoBox"></div>
 
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    <div class="status" id="detected">Analysing&hellip;</div>
 
-  <link rel="stylesheet" href="style (1).css" />
-</head>
-<body>
-  <div class="app">
-    <header class="topbar">
-      <div class="brand">Dr Synthetica</div>
-      <div class="dept">Department of Feeling &middot; Session Terminal</div>
-    </header>
+    <button class="btn" id="beginBtn">
+      Begin Again
+    </button>
+  </section>
 
-    <main class="grid">
-      //cam
-      <section>
-        <span class="tab">Live Feed</span>
+  <section>
+    <span class="tab">Transcript</span>
 
-        // p5 places its canvas inside this element via cnv.parent('videoBox')
-        <div class="videoBox" id="videoBox"></div>
+    <div class="transcript" id="transcript"></div>
 
-        <div class="status" id="detected">Analysing&hellip;</div>
-        <button class="btn" id="beginBtn">Begin Again</button>
-      </section>
+    <div class="controls">
+      <input
+        id="reply"
+        type="text"
+        placeholder="Type your reply&hellip;"
+      />
 
-      <section>
-        <span class="tab">Transcript</span>
-
-        <div class="transcript" id="transcript"></div>
-
-        <div class="controls">
-          <input id="reply" type="text" placeholder="Type your reply&hellip;" />
-          <button class="btn" id="replyBtn">Send</button>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  //my p5 sketch
-  <script src="sketch.js"></script>
-</body>
-</html>
+      <button class="btn" id="replyBtn">
+        Send
+      </button>
+    </div>
+  </section>
+</main>
