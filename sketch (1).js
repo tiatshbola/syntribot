@@ -1,7 +1,4 @@
-// Mrs Synthetic — p5.js + ml5.js
-// AI DISCLOSURE: an AI assistant (Claude, Anthropic) helped with debugging, the
-// interaction wiring, and the interface styling. The concept and all the
-// question writing are my own.  >>> Rewrite this note in your own words.
+
 
 let classifier, video, label = "";
 let sessionStart = 0, waitSeconds = 5;
@@ -25,6 +22,7 @@ let responses = {
 };
 
 let sessionBank = null, questionIndex = 0, sessionOver = false, transcript = [];
+let scores = {};
 let detectedEl, transcriptEl, replyInput;
 
 function preload() {
@@ -89,15 +87,30 @@ function draw() {
 
 function gotResult(results) {
   if (!results || results.length === 0) return;
+
+  let top = results[0];
+  for (let r of results) if (r.confidence > top.confidence) top = r;
+  label = top.label;
+
   let elapsed = (millis() - sessionStart) / 1000;
-  if (elapsed < waitSeconds) return;
+  if (elapsed < waitSeconds) {
+    scores[top.label] = (scores[top.label] || 0) + top.confidence;
+    return;
+  }
+
   if (sessionBank === null) {
-    label = results[0].label;
+    label = pickWinner();
     sessionBank = bankFor(label);
     questionIndex = 0;
     transcript.push(["Dr Synthetica", sessionBank[questionIndex]]);
     renderTranscript();
   }
+}
+
+function pickWinner() {
+  let best = null, bestScore = -1;
+  for (let k in scores) if (scores[k] > bestScore) { bestScore = scores[k]; best = k; }
+  return best || label || "happy";
 }
 
 function bankFor(lbl) {
@@ -134,7 +147,7 @@ function renderTranscript() {
 
 function restart() {
   sessionBank = null; questionIndex = 0; sessionOver = false;
-  transcript = []; label = "";
+  transcript = []; label = ""; scores = {};
   replyInput.value(""); transcriptEl.html("");
   sessionStart = millis();
 }
