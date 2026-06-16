@@ -1,10 +1,10 @@
 
 
-// Your trained Teachable Machine model:
+//  trained Teachable Machine model:
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/HmMegiSBC/";
 
-// Question banks. Keys are matched case-insensitively to your class names,
-// so "happy"/"Happy"/"HAPPY" all work. Make the questions your own.
+// Question banks. Keys are matched case-insensitively to  class names,
+
 const RESPONSES = {
   "happy": [
     "And underneath the smile — what's there?",
@@ -80,7 +80,7 @@ async function predict() {
 
   if (top.probability < CONFIDENCE_THRESHOLD) return;
 
-  // only respond once a state has held steady (so she isn't jittery)
+  // only respond once a state has held steady (so it isn't jittery)
   if (top.className !== candidateState) {
     candidateState = top.className;
     candidateSince = performance.now();
