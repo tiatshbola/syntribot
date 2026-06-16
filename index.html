@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- p5.js + ml5.js (sketch.js needs these) -->
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
 
@@ -22,18 +22,17 @@
     </header>
 
     <main class="grid">
-      <!-- LEFT: camera -->
+      //cam
       <section>
         <span class="tab">Live Feed</span>
 
-        <!-- p5 places its canvas inside this element via cnv.parent('videoBox') -->
+        // p5 places its canvas inside this element via cnv.parent('videoBox')
         <div class="videoBox" id="videoBox"></div>
 
         <div class="status" id="detected">Analysing&hellip;</div>
         <button class="btn" id="beginBtn">Begin Again</button>
       </section>
 
-      <!-- RIGHT: conversation -->
       <section>
         <span class="tab">Transcript</span>
 
@@ -47,7 +46,7 @@
     </main>
   </div>
 
-  <!-- your sketch -->
+  //my p5 sketch
   <script src="sketch.js"></script>
 </body>
 </html>
