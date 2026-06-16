@@ -1,11 +1,4 @@
-/* ===========================================================================
-   Mrs Synthetic — logic
-   AI DISCLOSURE: scaffolded with the help of an AI assistant (Claude,
-   Anthropic) — Teachable Machine integration + prediction loop. Edit the
-   question banks to your own words.
-   =========================================================================== */
 
-/* ---- CONFIG ---- */
 
 // Your trained Teachable Machine model:
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/HmMegiSBC/";
@@ -29,8 +22,7 @@ const FALLBACK_QUESTION = "I don't have a script for what you're showing me. Sit
 const CONFIDENCE_THRESHOLD = 0.55; // model must be this sure before she speaks
 const STABLE_MS = 1200;            // a state must hold this long before she responds
 
-
-/* ---- RUNTIME ---- */
+//runtime
 let model, webcam;
 let currentState = null, candidateState = null, candidateSince = 0, lastQuestion = "";
 
